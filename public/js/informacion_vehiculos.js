@@ -6,13 +6,6 @@ const vehicles = [
     km: "70,500 km",
     siniestroDescription: "En este apartado se muestran los detalles del sinistero del vehículo",
     progress: 65,
-    time: "02:15:30:45",
-    timeBoxes: [
-      { value: "02", label: "Días" },
-      { value: "15", label: "Horas" },
-      { value: "30", label: "Min" },
-      { value: "45", label: "Seg" }
-    ],
     images: [
       { src: "public/images/Ford-0.png", alt: "Vehículo en subasta", active: true },
       { src: "public/images/Ford-1.jpeg", alt: "Vehículo en subasta" },
@@ -30,13 +23,6 @@ const vehicles = [
     km: "8,500 km",
     siniestroDescription: "En este apartado se muestran los detalles del sinistero del vehículo",
     progress: 65,
-    time: "01:02:03:12",
-    timeBoxes: [
-      { value: "01", label: "Días" },
-      { value: "2", label: "Horas" },
-      { value: "3", label: "Min" },
-      { value: "12", label: "Seg" }
-    ],
     images: [
       { src: "public/images/Mercedes-0.jpg", alt: "Vehículo en subasta", active: true },
       { src: "public/images/Mercedes-1.png", alt: "Vehículo en subasta" },
@@ -75,6 +61,22 @@ function createPagination() {
   });
 }
 
+function initializeBidHandlers() {
+  document.querySelectorAll('.btn-bid').forEach(button => {
+      button.addEventListener('click', function() {
+          const vehicleId = this.closest('.page').querySelector('.bid-input').dataset.vehicleId;
+          const bidInput = document.querySelector(`.bid-input[data-vehicle-id="${vehicleId}"]`);
+          
+          const bidDisplay = document.querySelector(`.bid-display[data-vehicle-id="${vehicleId}"]`);
+          
+          if (bidInput.value) {
+              bidDisplay.classList.remove('d-none');
+              bidDisplay.querySelector('h4').textContent = `$${bidInput.value} MXN`;
+              bidInput.value = ''; // Limpiar el input
+          }
+      });
+  });
+}
 
 function initializeCarousels() {
   vehicles.forEach((_, index) => {
@@ -85,6 +87,8 @@ function initializeCarousels() {
       });
   });
 }
+
+
 
 function initializeTimers() {
   document.querySelectorAll('.time-display').forEach((timeDisplay) => {
@@ -121,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createPagination();     // Genera los botones de paginación
   initializeCarousels();  // Activa los carruseles
   initializeTimers();     // Activa los temporizadores
+  initializeBidHandlers() // Activa los manejadores de subastas
   
   // Event listener para la paginación
   document.querySelectorAll('.page-link').forEach(link => {

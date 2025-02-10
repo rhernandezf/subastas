@@ -78,21 +78,20 @@
                                         <small class="text-muted d-block">BOLSA DE REPARACION</small>
                                         <h4 class="mb-0">{{repairBag}}</h4>
                                     </div>
-                                </div>
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: '{{progress}}%'">
-                                </div>
-                            </div>
-
-                            <!-- Tiempo -->
-                            <div class="row g-2 mb-4">
-                                {{#timeBoxes}}
-                                <div class="col-3">
-                                    <div class="time-box">
-                                        <div class="fw-bold">{{value}}</div>
-                                        <small class="text-muted">{{label}}</small>
+                                    <!-- Espacio para mostrar la oferta -->
+                                    <div class="bid-display d-none" data-vehicle-id="{{id}}">
+                                        <small class="text-muted d-block">TU OFERTA</small>
+                                        <h4 class="mb-0 text-success"></h4>
                                     </div>
                                 </div>
-                                {{/timeBoxes}}
+                            </div>
+                            <!-- Apartado de ingresa tu oferta -->
+                            <div class="col-12 col-md-5 text-end mb-3">
+                                <div class="d-flex flex-column align-items-end gap-1"s>
+                                    <small class="text-muted">INGRESA TU OFERTA</small>
+                                    <input type="number" class="form-control bid-input" placeholder="$ MXN"
+                                        data-vehicle-id="{{id}}" style="width: 120px;">
+                                </div>
                             </div>
 
                             <!-- Botón -->
